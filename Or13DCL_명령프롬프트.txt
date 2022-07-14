@@ -1,0 +1,235 @@
+Microsoft Windows [Version 10.0.19043.1645]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\kosmo>sqlplus study/1234
+
+SQL*Plus: Release 11.2.0.2.0 Production on 월 4월 25 12:04:01 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> exit
+Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+C:\Users\kosmo>sqlplus study
+
+SQL*Plus: Release 11.2.0.2.0 Production on 월 4월 25 12:04:13 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL>
+SQL>
+SQL>
+SQL> exit
+Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+C:\Users\kosmo>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on 월 4월 25 12:04:42 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: study
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> exit
+Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+C:\Users\kosmo>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on 월 4월 25 12:09:25 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: test_user1
+Enter password:
+ERROR:
+ORA-01045: user TEST_USER1 lacks CREATE SESSION privilege; logon denied
+
+
+Enter user-name: test_user1
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> show user;
+USER is "TEST_USER1"
+SQL> create table tb (
+  2  idx number);
+create table tb (
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> create table tb (
+  2  idx number);
+create table tb (
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'SYSTEM'
+
+
+SQL> create table tb (
+  2  idx number);
+
+Table created.
+
+SQL> desc tb;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IDX                                                NUMBER
+
+SQL> conn test_user2
+Enter password:
+Connected.
+SQL> show user;
+USER is "TEST_USER2"
+SQL> create table tb (
+  2  idx number);
+create table tb (
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'USERS'
+
+
+SQL> create table tb (
+  2  idx number);
+
+Table created.
+
+SQL> desc tb;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IDX                                                NUMBER
+
+SQL> conn test_user1/1234;
+Connected.
+SQL> create table tb (
+  2  idx number);
+create table tb (
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table tb2 (
+  2  idx number);
+create table tb2 (
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'USERS'
+
+
+SQL> quit
+Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+C:\Users\kosmo>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on 월 4월 25 13:03:48 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: test_user1
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Enter user-name: test_user1
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> show user;
+USER is "TEST_USER1"
+SQL> insert into tb values (1);
+
+1 row created.
+
+SQL> show user;
+USER is "TEST_USER1"
+SQL> conn test_user2;
+Enter password:
+Connected.
+SQL> insert into tb values (1);
+
+1 row created.
+
+SQL> create sequence seq_kosmo
+  2  start with 1;
+
+Sequence created.
+
+SQL> conn test_user1;
+Enter password:
+Connected.
+SQL> create sequence seq_kosmo
+  2  start with 1;
+create sequence seq_kosmo
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> show user;
+USER is "TEST_USER1"
+SQL> conn test_user2
+Enter password:
+Connected.
+SQL> conn test_user3
+Enter password:
+Connected.
+SQL> create table tb2 (
+  2  idx number);
+create table tb2 (
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'SYSTEM'
+
+
+SQL> show user;
+USER is "TEST_USER3"
+SQL> exit;
+Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+C:\Users\kosmo>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on 월 4월 25 14:39:28 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: test_user3
+Enter password:
+ERROR:
+ORA-01045: user TEST_USER3 lacks CREATE SESSION privilege; logon denied
+
+
+Enter user-name: test_user1
+Enter password:
+ERROR:
+ORA-01045: user TEST_USER1 lacks CREATE SESSION privilege; logon denied
+
+
+Enter user-name: test_user2
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> show user;
+USER is "TEST_USER2"
+SQL>   
